@@ -1,10 +1,4 @@
 
-let gridW: number = 100;
-let gridH: number = 100;
-let gridWxH: number = gridW * gridH;
-
-let position: [number, number] = [0,0]
-
 enum Direction {
     NORTH = 'N',
     SOUTH = 'S',
@@ -112,14 +106,6 @@ class Robot {
 
         let numDir: number = direction == 'f' ? -1 : 1;
         let newPosition: [number,number] = this.positionXY;
-
-        // if(this.direction == Direction.NORTH || this.direction == Direction.SOUTH){
-        //      newPosition = [this.positionXY[0], this.positionXY[1] + numDir];
-            
-        // }
-        // else{
-        //     newPosition = [this.positionXY[0] + numDir, this.positionXY[1]];
-        // }
 
         switch(this.direction){
             case(Direction.NORTH): 

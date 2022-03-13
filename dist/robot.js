@@ -1,8 +1,4 @@
 "use strict";
-let gridW = 100;
-let gridH = 100;
-let gridWxH = gridW * gridH;
-let position = [0, 0];
 var Direction;
 (function (Direction) {
     Direction["NORTH"] = "N";
@@ -77,12 +73,6 @@ class Robot {
     moveFB(direction) {
         let numDir = direction == 'f' ? -1 : 1;
         let newPosition = this.positionXY;
-        // if(this.direction == Direction.NORTH || this.direction == Direction.SOUTH){
-        //      newPosition = [this.positionXY[0], this.positionXY[1] + numDir];
-        // }
-        // else{
-        //     newPosition = [this.positionXY[0] + numDir, this.positionXY[1]];
-        // }
         switch (this.direction) {
             case (Direction.NORTH):
                 newPosition = [this.positionXY[0], this.positionXY[1] + numDir];
