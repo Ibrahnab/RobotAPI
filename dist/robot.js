@@ -68,6 +68,7 @@ class Robot {
                 this.turnLR(char);
             }
         }
+        console.log("\n");
         return this.positionXY;
     }
     moveFB(direction) {

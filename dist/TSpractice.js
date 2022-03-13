@@ -88,4 +88,4 @@ function getArray(items) {
 let numArray = getArray([1, 2, 3, 4]); //Which allows you to define the type when the array is created
 let strArray = getArray(['brad', 'John', 'Jill']);
 numArray.push(2);
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=TSpractice.js.map
