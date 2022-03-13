@@ -7,7 +7,6 @@ enum Direction {
 }
 
 let compass: Direction[] = [Direction.NORTH,Direction.EAST, Direction.SOUTH, Direction.WEST];
-let compasss: string[] = ['N', 'E', 'S','W'];
 
 class Obstacle {
     private positionXY: [number, number];
@@ -54,7 +53,7 @@ class Grid{
     notOverlappingObstacle(positionXY:[number,number]): boolean{
 
         //Check if a given position collides with any obstacles in the grid
-        console.log( "     x: " +  positionXY[0] + " y: " + positionXY[1])
+        console.log( "     nextPos = x: " +  positionXY[0] + " y: " + positionXY[1])
 
         if(this.obstacles.findIndex(e => e.getPosition()[0] == positionXY[0] && e.getPosition()[1] == positionXY[1]) > -1){
             return false;
@@ -154,28 +153,65 @@ class Robot {
     }
 }
 
-//-------------
+//------------- Testing function
+
+function Tester(gridWH:[number,number], obstaclesPosXY:[number,number][], robotPosXY: [number,number], robotDir: Direction, moveCommands:string){
+    
+    //Create obstacles with given list
+    let obstacles: Obstacle[] = [];
+    for(let i=0;i<obstaclesPosXY.length;i++){
+        obstacles.push(
+            new Obstacle([obstaclesPosXY[i][0], obstaclesPosXY[i][1]])
+        )
+    }
+    
+    //Create a grid with given inputs
+    let grid = new Grid(gridWH[0],gridWH[1],obstacles);
+
+    //Create a robot with given inputs
+    let robot = new Robot(robotPosXY, robotDir,grid);
+
+    //Follow the given commands
+    robot.followCommands(moveCommands);
+    
+    let posTuple:[number, number] = robot.getPositionXY();
+    console.log("Final position: x: " + posTuple[0] + " y: " + posTuple[1] + "\n ---------------");
+
+}
+
+Tester([100,100], [], [0,0], Direction.SOUTH, "fflff");
+Tester([50,50], [], [1,1], Direction.NORTH, "fflff");
+Tester([100,100], [[48,50]], [50,50], Direction.NORTH, "fflffrbb");
+
+//--------------- Manual tests
 
 let obstacle1 = new Obstacle([48,50]);
 
-let grid1 = new Grid(100,100,[]);
-let grid2 = new Grid(50,50,[])
+// let grid1 = new Grid(100,100,[]);
+// let grid2 = new Grid(50,50,[])
 let grid3 = new Grid(100,100,[obstacle1]);
 
-let robot1 = new Robot([0,0],Direction.SOUTH,grid1);
-let robot2 = new Robot([1,1],Direction.NORTH,grid2);
+// let robot1 = new Robot([0,0],Direction.SOUTH,grid1);
+// let robot2 = new Robot([1,1],Direction.NORTH,grid2);
 let robot3 = new Robot([50,50],Direction.NORTH,grid3);
 
-robot1.followCommands("fflff");
-robot2.followCommands("fflff");
+// robot1.followCommands("fflff");
+// robot2.followCommands("fflff");
 robot3.followCommands("fflffrbb");
 
-let posTuple:[number, number] = robot1.getPositionXY();
-console.log("x: " + posTuple[0] + " y: " + posTuple[1] + ", ( x: 2 y: 2)");
+// let posTuple:[number, number] = robot1.getPositionXY();
+// console.log("x: " + posTuple[0] + " y: " + posTuple[1] + ", ( x: 2 y: 2)");
 
-let posTuple2:[number, number] = robot2.getPositionXY();
-console.log("x: " + posTuple2[0] + " y: " + posTuple2[1] + ", (x: 1 y: 0)");
+// let posTuple2:[number, number] = robot2.getPositionXY();
+// console.log("x: " + posTuple2[0] + " y: " + posTuple2[1] + ", (x: 1 y: 0)");
 
 let posTuple3:[number, number] = robot3.getPositionXY();
 console.log("x: " + posTuple3[0] + " y: " + posTuple3[1] + ", (x: 48 y: 49)");
+
+
+
+
+
+
+
 
