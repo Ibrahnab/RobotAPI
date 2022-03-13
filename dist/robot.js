@@ -6,7 +6,7 @@ var Direction;
     Direction["WEST"] = "W";
     Direction["EAST"] = "E";
 })(Direction || (Direction = {}));
-let compass = [Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST];
+//let compass: Direction[] = [Direction.NORTH,Direction.EAST, Direction.SOUTH, Direction.WEST];
 class Obstacle {
     constructor(positionXY) {
         this.positionXY = positionXY;
@@ -49,6 +49,7 @@ class Grid {
 }
 class Robot {
     constructor(positionXY, direction, grid) {
+        this.compass = [Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST];
         this.positionXY = positionXY;
         this.direction = direction;
         this.grid = grid;
@@ -102,8 +103,8 @@ class Robot {
     turnLR(direction) {
         //Get the direction to turn in the compass
         let numDir = direction == 'l' ? -1 : 1;
-        const compassPos = compass.findIndex(e => e == this.direction); //Find the index of the current direction in the compass
-        this.direction = compass[(((compassPos + numDir) % 4) + 4) % 4]; //Turn to the l/r of that direction
+        const compassPos = this.compass.findIndex(e => e == this.direction); //Find the index of the current direction in the compass
+        this.direction = this.compass[(((compassPos + numDir) % 4) + 4) % 4]; //Turn to the l/r of that direction
         console.log("New direction: " + this.direction);
     }
     getPositionXY() {

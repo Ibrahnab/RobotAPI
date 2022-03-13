@@ -6,7 +6,7 @@ enum Direction {
     EAST = 'E'
 }
 
-let compass: Direction[] = [Direction.NORTH,Direction.EAST, Direction.SOUTH, Direction.WEST];
+//let compass: Direction[] = [Direction.NORTH,Direction.EAST, Direction.SOUTH, Direction.WEST];
 
 class Obstacle {
     private positionXY: [number, number];
@@ -75,6 +75,7 @@ class Robot {
     private positionXY: [number, number];
     private direction: Direction;
     private grid: Grid;
+    private compass: Direction[] = [Direction.NORTH,Direction.EAST, Direction.SOUTH, Direction.WEST];
 
     constructor(positionXY:[number, number], direction: Direction, grid: Grid){
         this.positionXY = positionXY;
@@ -143,8 +144,8 @@ class Robot {
         //Get the direction to turn in the compass
         let numDir: number = direction == 'l' ? -1 : 1;
         
-        const compassPos = compass.findIndex(e => e == this.direction) //Find the index of the current direction in the compass
-        this.direction = compass[(((compassPos + numDir) % 4) + 4) % 4]; //Turn to the l/r of that direction
+        const compassPos = this.compass.findIndex(e => e == this.direction) //Find the index of the current direction in the compass
+        this.direction = this.compass[(((compassPos + numDir) % 4) + 4) % 4]; //Turn to the l/r of that direction
         console.log("New direction: " + this.direction)
     }
 
